@@ -33,6 +33,12 @@
         background: $lightgreen;
       }
     }
+    &:hover {
+      &::before,
+      &:after {
+        background: $green;
+      }
+    }
   }
   &.incorrect {
     &::before,
@@ -46,6 +52,12 @@
       &:after {
         border-color: $red;
         background: $lightred;
+      }
+    }
+    &:hover {
+      &::before,
+      &:after {
+        background: $red;
       }
     }
   }
