@@ -1,0 +1,179 @@
+@import "../../styles/mixins.scss";
+
+.answer_item {
+  &.locked {
+    pointer-events: none;
+  }
+  &:focus {
+    &::before,
+    &:after {
+      background: $lightorange;
+    }
+    .answer_item__wrapper {
+      background: $lightorange;
+      border-color: $preorange;
+      &::before,
+      &:after {
+        border-color: $preorange;
+        background: $lightorange;
+      }
+    }
+  }
+  &.correct {
+    &::before,
+    &:after {
+      background: $green;
+    }
+    .answer_item__wrapper {
+      background: $lightgreen;
+      border-color: $green;
+      &::before,
+      &:after {
+        border-color: $green;
+        background: $lightgreen;
+      }
+    }
+  }
+  &.incorrect {
+    &::before,
+    &:after {
+      background: $red;
+    }
+    .answer_item__wrapper {
+      background: $lightred;
+      border-color: $red;
+      &::before,
+      &:after {
+        border-color: $red;
+        background: $lightred;
+      }
+    }
+  }
+  position: relative;
+  cursor: pointer;
+  &:not(:last-of-type) {
+    margin-bottom: 8px;
+    @include pcS {
+      margin-bottom: 0;
+    }
+  }
+  @include trans;
+  &::before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    top: 27px;
+    background: $grey;
+    height: 1px;
+    @include tablet {
+      top: 42px;
+    }
+    @include pcS {
+      width: rem(15);
+      height: rem(1);
+      top: rem(49);
+    }
+  }
+  &:before {
+    left: -35px;
+    @include tablet {
+      left: 0;
+    }
+  }
+  &:after {
+    right: -35px;
+    @include tablet {
+      right: 0;
+    }
+  }
+  &:hover {
+    &::before,
+    &:after {
+      background: $preorange;
+    }
+  }
+  &__wrapper {
+    border-top: 1px solid $grey;
+    border-bottom: 1px solid $grey;
+    z-index: 1;
+    width: 100%;
+    position: relative;
+    height: 55px;
+    display: flex;
+    background: $white;
+    align-items: center;
+    border-radius: 10px;
+
+    &:hover {
+      border-color: $preorange;
+      &::before,
+      &::after {
+        border-color: $preorange;
+      }
+    }
+    @include trans;
+    &::before,
+    &::after {
+      content: "";
+      height: 37px;
+      width: 37px;
+      position: absolute;
+      background: $white;
+      z-index: -1;
+      transform: rotate(45deg);
+      @include trans;
+      @include pcS {
+        height: rem(47);
+        width: rem(47);
+      }
+    }
+    &::before {
+      left: -14px;
+      border-left: 1px solid $grey;
+      border-bottom: 1px solid $grey;
+      @include pcS {
+        left: rem(-20);
+        border-left: rem(1) solid $grey;
+        border-bottom: rem(1) solid $grey;
+      }
+    }
+    &::after {
+      right: -14px;
+      border-right: 1px solid $grey;
+      border-top: 1px solid $grey;
+      @include pcS {
+        right: rem(-20);
+        border-right: rem(1) solid $grey;
+        border-top: rem(1) solid $grey;
+      }
+    }
+    @include pcS {
+      height: rem(70);
+      border-radius: rem(10);
+      border-top: rem(1) solid $grey;
+      border-bottom: rem(1) solid $grey;
+    }
+  }
+  &__text {
+    &:before {
+      counter-increment: my-counter;
+      content: counter(my-counter, Upper-alpha) " ";
+      font-weight: 600;
+      color: $orange;
+      margin-right: 10px;
+      @include pcS {
+        margin-right: rem(10);
+      }
+    }
+  }
+  width: 100%;
+
+  @include tablet {
+    width: 50%;
+    padding: 15px 35px;
+  }
+  @include pcS {
+    padding: rem(15) rem(44);
+  }
+}

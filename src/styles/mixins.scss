@@ -1,0 +1,209 @@
+@import "./variables.scss";
+
+@mixin media($width: $media) {
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin pcS {
+  @include media($pcS) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @include media($tablet) {
+    @content;
+  }
+}
+
+@mixin border_box() {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@function rem($pixels, $context: $size-context) {
+  @return #{$pixels/$context}rem;
+}
+
+@mixin trans($val: 0.3s) {
+  -moz-transition: $val;
+  -webkit-transition: $val;
+  -o-transition: $val;
+  -ms-transition: $val;
+  transition: $val;
+}
+
+@mixin block_full() {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 0;
+}
+@mixin h1 {
+  font-size: 32px;
+  font-weight: 700;
+  @include tablet {
+    font-size: 42px;
+  }
+  @include pcS {
+    font-size: rem(56);
+  }
+}
+
+@mixin h2 {
+  font-size: 24px;
+  font-weight: 700;
+  @include tablet {
+    font-size: 36px;
+  }
+  @include pcS {
+    font-size: rem(48);
+  }
+}
+
+@mixin h3 {
+  font-size: 22px;
+  font-weight: 700;
+  @include tablet {
+    font-size: 28px;
+  }
+  @include pcS {
+    font-size: rem(36);
+  }
+}
+
+@mixin h4 {
+  font-size: 20px;
+  font-weight: 700;
+  @include tablet {
+    font-size: 24px;
+  }
+  @include pcS {
+    font-size: rem(34);
+  }
+}
+
+@mixin h5 {
+  font-size: 18px;
+  font-weight: 700;
+  @include tablet {
+    font-size: 20px;
+  }
+  @include pcS {
+    font-size: rem(32);
+  }
+}
+
+@mixin regular {
+  font-size: 14px;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include pcS {
+    font-size: rem(20);
+  }
+  font-weight: 400;
+}
+
+@mixin layout {
+  padding: 50px 15px;
+  @include tablet {
+    padding: 75px 25px;
+  }
+  @include pcS {
+    padding: rem(130) rem(120);
+  }
+}
+@mixin scroll($thumb: $white, $track: rgba(0, 0, 0, 0.1), $width: 5px) {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $track;
+    padding: 0 2px;
+    border-radius: 2px;
+    width: 1px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+    border-radius: 2px;
+    width: 5px;
+    height: 5px;
+    cursor: pointer;
+  }
+}
+
+@mixin fadeInUp {
+  animation: fadeInUp 0.6s ease-in forwards;
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(15%);
+      transform: translateY(15%);
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin FadeIn {
+  animation: FadeIn 0.6s ease-in forwards;
+  @keyframes FadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@mixin FadeInLeft {
+  animation: FadeInLeft 0.6s ease-in forwards;
+  @keyframes FadeInLeft {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(15%);
+      transform: translateX(15%);
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+}
+@mixin FadeInRight {
+  animation: FadeInRight 0.6s ease-in forwards;
+  @keyframes FadeInRight {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(-15%);
+      transform: translateX(-15%);
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+}

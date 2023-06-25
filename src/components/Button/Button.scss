@@ -1,0 +1,21 @@
+@import "../../styles/mixins.scss";
+
+.button {
+  background: $orange;
+  color: $white;
+  padding: 15px 25px;
+  width: 100%;
+  border-radius: 8px;
+  font-weight: 600;
+  @include trans;
+  @include pcS {
+    padding: rem(20) rem(25);
+    border-radius: rem(12);
+  }
+  &:hover {
+    background: $preorange;
+  }
+  &:focus {
+    background: $darkorange;
+  }
+}

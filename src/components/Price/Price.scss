@@ -1,0 +1,139 @@
+@import "../../styles/mixins.scss";
+
+.price_item {
+  position: relative;
+  width: 75%;
+
+  &:not(:first-of-type) {
+    margin-bottom: 8px;
+    @include pcS {
+      margin-bottom: rem(8);
+    }
+  }
+
+  &.inactive {
+    color: $grey;
+    &::before,
+    &:after {
+      background: $grey;
+    }
+    .price_item__wrapper {
+      border-color: $grey;
+      &::before,
+      &:after {
+        border-color: $grey;
+      }
+    }
+  }
+
+  &.active {
+    color: $orange;
+    &::before,
+    &:after {
+      background: $orange;
+    }
+    .price_item__wrapper {
+      border-color: $orange;
+      &::before,
+      &:after {
+        border-color: $orange;
+      }
+    }
+  }
+
+  &::before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: calc(100vw - 87.5vw);
+    top: 14px;
+    background: $grey;
+    height: 1px;
+    @include pcS {
+      height: rem(1);
+      top: rem(19);
+      width: calc(100vw - 93.75vw);
+    }
+  }
+
+  &:before {
+    left: -55px;
+    @include pcS {
+      left: unset;
+      right: 100%;
+    }
+  }
+
+  &:after {
+    right: -55px;
+    @include pcS {
+      left: 100%;
+      right: unset;
+    }
+  }
+
+  &__wrapper {
+    border-top: 1px solid $grey;
+    border-bottom: 1px solid $grey;
+    z-index: 1;
+    width: 100%;
+    position: relative;
+    height: 30px;
+    display: flex;
+    background: $white;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    @include pcS {
+      border-top: rem(1) solid $grey;
+      border-bottom: rem(1) solid $grey;
+      border-radius: rem(10);
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      height: 20px;
+      width: 20px;
+      position: absolute;
+      transform: rotate(45deg);
+      background: $white;
+      z-index: -1;
+      @include pcS {
+        width: rem(24);
+        height: rem(24);
+      }
+    }
+
+    &::before {
+      left: -5px;
+      border-left: 1px solid $grey;
+      border-bottom: 1px solid $grey;
+      @include pcS {
+        left: rem(-10);
+        border-left: rem(1) solid $grey;
+        border-bottom: rem(1) solid $grey;
+      }
+    }
+
+    &::after {
+      right: -5px;
+      border-right: 1px solid $grey;
+      border-top: 1px solid $grey;
+      @include pcS {
+        right: rem(-10);
+        border-right: rem(1) solid $grey;
+        border-top: rem(1) solid $grey;
+      }
+    }
+    @include pcS {
+      height: rem(40);
+    }
+  }
+  // &__text {
+  // }
+
+  @include tablet {
+    width: 50%;
+  }
+}
