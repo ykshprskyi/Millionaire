@@ -28,7 +28,6 @@ export const Game = () => {
   const questions: Array<Iquestion> = useSelector(
     (state: IState) => state.questions
   );
-
   questions.sort((q, q1) => q.id - q1.id);
 
   const score: Iscore = useSelector((state: IState) => state.score);
@@ -40,40 +39,49 @@ export const Game = () => {
 
   const answerHandler = (ans, index) => {
     setLocked(true);
-    if (ans.correct === true) {
-      if (score.questionInd === questions.length - 1) {
-        document.getElementById("answer-" + index).classList.toggle("correct");
-        setTimeout(() => {
+
+    const toggleCorrectClass = () => {
+      document.getElementById("answer-" + index).classList.toggle("correct");
+    };
+
+    const toggleIncorrectClass = () => {
+      document.getElementById("answer-" + index).classList.toggle("incorrect");
+    };
+
+    const handleCorrectAnswer = () => {
+      toggleCorrectClass();
+      setTimeout(() => {
+        if (score.questionInd === questions.length - 1) {
           dispatch(
             updateScore(score.questionInd, questions[score.questionInd].price)
           );
           navigateTo("/result");
-          setLocked(false);
-        }, delay);
-      } else {
-        document.getElementById("answer-" + index).classList.toggle("correct");
-        setTimeout(() => {
-          document
-            .getElementById("answer-" + index)
-            .classList.toggle("correct");
+        } else {
+          toggleCorrectClass();
           dispatch(
             updateScore(
               score.questionInd + 1,
               questions[score.questionInd].price
             )
           );
-          setLocked(false);
-        }, delay);
-      }
-    } else {
-      document.getElementById("answer-" + index).classList.toggle("incorrect");
+        }
+        setLocked(false);
+      }, delay);
+    };
+
+    const handleIncorrectAnswer = () => {
+      toggleIncorrectClass();
       setTimeout(() => {
-        document
-          .getElementById("answer-" + index)
-          .classList.toggle("incorrect");
+        toggleIncorrectClass();
         navigateTo("/result");
         setLocked(false);
       }, delay);
+    };
+
+    if (ans.correct === true) {
+      handleCorrectAnswer();
+    } else {
+      handleIncorrectAnswer();
     }
   };
 
@@ -90,7 +98,7 @@ export const Game = () => {
           {questions.map((el, index) => {
             return (
               <Price
-                key={el.id}
+                key={"price" + el.id}
                 price={el.price}
                 type={`${
                   index < score.questionInd
@@ -118,7 +126,7 @@ export const Game = () => {
             {questions[score.questionInd].answers.map((ans, index) => {
               return (
                 <div
-                  key={index}
+                  key={ans.text + index}
                   id={"answer-" + index}
                   style={{ pointerEvents: locked ? "none" : "auto" }}
                   className="answer_item"
